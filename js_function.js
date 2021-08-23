@@ -11,4 +11,4 @@ function sayBye(name){
 
 
 const greetyukyung = sayBye("yukyung")
-console.log(greetyukyung)
+console.log(greetyukyung) //greetyukyung은 sayBye의 실행된 결과 값, 앞서 sayBye에서 return 을 정의 하지 않았다면 undefined가 나왔을것,
