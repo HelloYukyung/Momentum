@@ -1,2 +1,2 @@
 # javascript_nomad
-Vanilla JS
+My first JavaScript study
