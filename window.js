@@ -1,18 +1,21 @@
 const title =document.querySelector("#title");
 
-function handleClick(event) {
-    title.style.color ="red";
 
-}
-title.addEventListener("click",handleClick);
+// .3
+// function handleClick(event) {
+//     title.style.color ="red";
 
+// }
+// title.addEventListener("click",handleClick);//title 은 클릭 당하기를 기다린다.(듣고 있는다)
+
+//.2
 // function handleClick(event) {
 //     console.log(event);
-// }// 이벤트를 다룰 함수를 만들 때마다 자바스크립트는 자동적으로 함수를 객체에 붙인다. 
+// }// 
 // title.addEventListener("click",handleClick);
 
 
-
+//.1
 // function handleResize(){
 //     console.log("I have been resized")
 // }

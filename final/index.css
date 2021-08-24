@@ -1,0 +1,19 @@
+body{
+    background-color: #ecf0f1;
+}
+body{
+    color:#34495e;
+
+}
+.btn{cursor: pointer;}
+
+.clicked{
+    color: #7f8c8d;
+}
+.form,
+.greetings{
+    display: none;
+}
+.showing{
+    display :block; /*요소를 bolck요소처럼 표시. 따라서 요소 앞뒤로 줄바꿈됨*/ㅇㅇㅇ 
+}
