@@ -2,56 +2,73 @@ const toDoForm =document.querySelector(".js-toDoForm"),
     toDoInput = toDoForm.querySelector("input"),
     toDoList = document.querySelector(".js-toDoList")
 
-const TODOS_LS = 'toDos';
+const TODOS_LS ="toDos";
 
-const toDos =[]; // 해야할 일을 생성했을때마다, 'toDos' array에 추가되도록 할 것임 
+let toDos =[];
 
-function saveToDos(){
-    localStorage.setItem(TODOS_LS,JSON.stringify(toDos));//JSON.stringify는 자바스크립트 object를 string으로 바꿔줌 
+function filterFn(toDo) {// forEach 에서 function을 실행하는 것과 같이 각각의 item과 같이 실행됨 
+    return toDo.id ===1// true인 아이템들만 가지고 새로운 array를 만듬 
+} 
+
+function deleteToDo(event) {
+    const btn = event.target;
+    const li = btn.parentNode; 
+    toDoList.removeChild(li);
+    const cleanToDos = toDos.filter(function(toDo){
+        //console.log(toDo.id, li.id); //li.id를 보면 string인 것을 볼 수 있음 따라서 parseInt 
+        return toDo.id !==parseInt(li.id) //모든 toDos가 'li'의 id와 같지 않을때 
+    });
+    toDos =cleanToDos //toDos를 let으로 저장하는 이유 
+    saveToDos();
 }
 
-function paintToDo(Text){
-    const li = document.createElement("li");
+function saveToDos(){
+    localStorage.setItem(TODOS_LS,JSON.stringify(toDos)); //JSON.stringify; object >string
+}
+
+function paintToDo(text) {
+    const li =document.createElement("li");
     const delBtn = document.createElement("button");
     const span =document.createElement("span");
-    const newId =toDos.length + 1 // toDos.length= toDos array의 길이를 샌다.
-    delBtn.innerText ="❌";
-    span.innerText = Text;
-    li.appendChild(delBtn);
+    const newId = toDos.length +1
+    span.innerText = text;
+    delBtn.innerHTML ="❌";
+    delBtn.addEventListener("click",deleteToDo);
     li.appendChild(span);
-    li.id =newId
+    li.appendChild(delBtn);
+    li.id =newId;
     toDoList.appendChild(li);
     const toDoObj = {
-        text: Text,
+        text: text,
         id: newId
     };
     toDos.push(toDoObj);
     saveToDos();
+    }
 
-
-}
 
 function handleSubmit(event){
     event.preventDefault();
-    const currentValue =toDoInput.value;
+    const currentValue = toDoInput.value;
     paintToDo(currentValue)
-    toDoInput.value ="";
+    toDoInput.value="";
+}
+
+function loadToDos() {
+    const loadedToDos =localStorage.getItem(TODOS_LS);
+    if (loadedToDos !== null) {
+        const parsedToDos =JSON.parse(loadedToDos);
+        parsedToDos.forEach(function(toDo) {
+            paintToDo(toDo.text);
+            
+        });
+            
+    }
 }
 
 
-function loadToDos(){
-    const loadedToDos = localStorage.getItem(TODOS_LS);
-    if(loadedToDos !==null){
-        const parsedToDos = JSON.parse(loadedToDos);
-        parsedToDos.forEach(function(todo){ // array를 위한 function
-            paintToDo(toDo.text);
-        });
-
-    }
-} 
-
-function init(){
-   loadToDos();
-   toDoForm.addEventListener("submit",handleSubmit)
+function init() {
+    loadToDos();
+    toDoForm.addEventListener("submit",handleSubmit)
 }
 init();

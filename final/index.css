@@ -15,5 +15,15 @@ body{
     display: none;
 }
 .showing{
-    display :block; /*요소를 bolck요소처럼 표시. 따라서 요소 앞뒤로 줄바꿈됨*/ㅇㅇㅇ 
+    display :block; /*요소를 bolck요소처럼 표시. 따라서 요소 앞뒤로 줄바꿈됨*/ 
+}
+
+.bgImage{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: -1;
+
 }
